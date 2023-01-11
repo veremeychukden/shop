@@ -2,6 +2,7 @@ import { useState } from "react";
 import FormInput from '../form-input/form-input';
 import Button from "../button/button";
 import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase";
+
 import './sign-up-form.scss';
 
 const defaultFormFields = {
@@ -29,6 +30,7 @@ const SignUpForm = () => {
 		try {
 			const { user } = await createAuthUserWithEmailAndPassword(email, password);
 			await createUserDocumentFromAuth(user, { displayName });
+
 			resetFormFields();
 		} catch (error) {
 			if (error.code === 'auth/email-already-in-use') {
